@@ -17,6 +17,12 @@
           <div class="float-right">
             <a href="cars/{{ $car->id }}/edit" class="border-b-2 pb-2 border-dotted italic text-green-500">Edit &rarr;</a>
           </div>
+
+          <form action="/cars/{{ $car->id }}" method="POST" class="pt-3">
+            @csrf
+            @method('DELETE')
+            <button class="border-b-2 pb-2 border-dotted italic text-red-500">Delete &rarr;</button>
+          </form>
           
           <span class="uppercase text-blue-500 font-bold text-xs italic">Founded: {{ $car->founded }}</span>
           <h2 class="text-gray-700 text-5xl">{{ $car->name }}</h2>
