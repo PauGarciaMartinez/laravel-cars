@@ -34,6 +34,14 @@
           @endforelse
         </table>
 
+        <p>Product types:
+          @forelse ($car->products as $product)
+            {{ $product->name }}
+          @empty
+            <p>No car product</p>
+          @endforelse
+        </p>
+
         <hr class="mt-4 mb-8">
       </div>
     </div>
