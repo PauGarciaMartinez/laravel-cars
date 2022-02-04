@@ -40,6 +40,12 @@ class CarsController extends Controller
      */
     public function store(Request $request)
     {
+      $request->validate([
+        'name' => 'required',
+        'founded' => 'required',
+        'description' => 'required'
+      ]);
+
       $car = Car::create([
         'name' => $request->input('name'),
         'founded' => $request->input('founded'),
