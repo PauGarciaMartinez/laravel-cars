@@ -9,18 +9,31 @@
       <div class="m-auto">
         <span class="uppercase text-blue-500 font-bold text-xs italic">Founded: {{ $car->founded }}</span>
         <p class="text-lg text-gray-700 py-6">{{ $car->description }}</p>
-        <ul>
-          <p class="text-lg text-gray-700 py-3">
-            Models:
-          </p>
+
+        <table>
+          <tr>
+            <th>Models</th>
+            <th>Engines</th>
+            <th>Date</th>
+          </tr>
+
           @forelse ($car->carModels as $model)
-            <li class="inline italic text-gray-600 px-1 py-6">
-              {{ $model['model_name'] }}
-            </li>
+            <tr>
+              <td>{{ $model->model_name }}</td>
+              <td>
+                @foreach ($car->carEngines as $engine)
+                  @if ($model->id == $engine->model_id)
+                    {{ $engine->engine_name }}
+                  @endif
+                @endforeach
+              </td>
+              <td>{{ date('d-m-Y', strtotime($car->productionDate->created_at)) }}</td>
+            </tr>
           @empty
-            <p>No models found</p>
+            <p>No car models found</p>
           @endforelse
-        </ul>
+        </table>
+
         <hr class="mt-4 mb-8">
       </div>
     </div>
