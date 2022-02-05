@@ -44,10 +44,14 @@ class CarsController extends Controller
     {
       $request->validated();
 
+      $newImageName = time().'-'.$request->name.'.'.$request->image->extension();
+      $request->image->move(public_path('images', $newImageName));
+
       $car = Car::create([
         'name' => $request->input('name'),
         'founded' => $request->input('founded'),
-        'description' => $request->input('description')
+        'description' => $request->input('description'),
+        'image_path' => $newImageName
       ]);
 
       return redirect('/cars');
